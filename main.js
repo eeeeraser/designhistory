@@ -200,7 +200,7 @@ function renderTeachingMetaBanner(i){
 function renderToolBoxDoc(i){
   const m = DOC_META[i];
   if(!m||!m.tools) return '';
-  return `${sectionTitle('核心理论工具箱（课程文档）')}
+  return `${sectionTitle('核心理论工具箱')}
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
     ${m.tools.map(x=>`<div class="concept-box border-amber-500/20"><h4 class="text-amber-900 font-bold text-sm mb-2">${x.t}</h4><p class="text-ink-600 text-xs leading-relaxed">${x.d}</p></div>`).join('')}
   </div>`;
@@ -222,7 +222,7 @@ function renderReadingSeminar(i){
 function renderPaperNoteAfterCivic(i){
   const d = DOC_APPENDIX[i];
   if(!d||!d.paperNote) return '';
-  return `<div class="rounded-lg border border-amber-500/30 bg-amber-50/50 p-5 mt-8 text-sm text-ink-700 leading-relaxed"><span class="font-bold text-amber-900">★ 论文节点（文档要求）</span> ${d.paperNote}</div>`;
+  return `<div class="rounded-lg border border-amber-500/30 bg-amber-50/50 p-5 mt-8 text-sm text-ink-700 leading-relaxed"><span class="font-bold text-amber-900">★ 论文节点</span> ${d.paperNote}</div>`;
 }
 
 // SVG patterns for cards
@@ -236,6 +236,91 @@ const patterns = [
   `<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width=".5" stroke-dasharray="4 4"/><line x1="10" y1="10" x2="110" y2="110" stroke="currentColor" stroke-width=".5"/><line x1="110" y1="10" x2="10" y2="110" stroke="currentColor" stroke-width=".5"/><rect x="30" y="30" width="60" height="60" fill="none" stroke="currentColor" stroke-width=".8"/></svg>`,
   `<svg viewBox="0 0 120 120"><path d="M60 10 L110 40 L110 80 L60 110 L10 80 L10 40 Z" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="60" cy="60" r="25" fill="none" stroke="currentColor" stroke-width=".5"/></svg>`
 ];
+
+// ========== 章节矢量主图标（详情页标题区，替代 emoji）==========
+function lectureHeroIconMarkup(i){
+  const a=L[i].color;
+  const svgs=[
+    `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 8h14v32H14V8z" stroke="currentColor" stroke-width="1.6"/><path d="M18 12h6M18 18h6M18 24h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M30 10l8 4v24l-8-4V10z" stroke="currentColor" stroke-width="1.6"/><circle cx="36" cy="22" r="3" stroke="currentColor" stroke-width="1.4"/></svg>`,
+    `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="24" cy="28" rx="14" ry="10" stroke="currentColor" stroke-width="1.6"/><path d="M24 18v-6M16 14h16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="18" cy="30" r="2" fill="currentColor"/><circle cx="24" cy="32" r="2" fill="currentColor"/><circle cx="30" cy="30" r="2" fill="currentColor"/><circle cx="27" cy="26" r="1.5" fill="currentColor"/></svg>`,
+    `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 32h32l-4-20H12L8 32z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 12h24l2 8H10l2-8z" stroke="currentColor" stroke-width="1.4"/><circle cx="16" cy="36" r="3" stroke="currentColor"/><circle cx="32" cy="36" r="3" stroke="currentColor"/><path d="M24 8v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M24 6L42 38H6L24 6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="24" cy="26" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M18 34h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+    `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="10" y="14" width="28" height="20" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M14 22h8M14 26h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M30 18l6 6-6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="34" r="4" stroke="currentColor" stroke-width="1.3"/></svg>`,
+    `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 24c8-12 24-12 32 0-8 12-24 12-32 0z" stroke="currentColor" stroke-width="1.6"/><path d="M14 24h20M24 14v20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="24" cy="24" r="4" stroke="currentColor" stroke-width="1.4"/></svg>`,
+    `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="1.5"/><path d="M24 8v8M24 32v8M8 24h8M32 24h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="32" cy="16" r="3" stroke="currentColor"/><circle cx="14" cy="30" r="3" stroke="currentColor"/></svg>`,
+    `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M24 6c-4 8-12 10-12 18 0 6 5 10 12 14 7-4 12-8 12-14 0-8-8-10-12-18z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><rect x="28" y="26" width="12" height="14" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M31 30h6M31 34h4" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>`
+  ];
+  return `<span class="lecture-hero-icon" style="--lec-accent:${a};color:${a}">${svgs[i]||svgs[0]}</span>`;
+}
+
+/** 每讲 4 枚主题图标 + 标签，置于「本讲文档信息」之后 */
+function renderChapterVisualBar(i){
+  const blocks=[
+    { sub:'本讲视觉提要 · 史学与方法', items:[
+      { lab:'叙事即权力', svg:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.3"/><path d="M12 20h16M20 12v16" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="20" r="4" fill="currentColor" opacity=".35"/></svg>` },
+      { lab:'五大流派', svg:`<svg viewBox="0 0 40 40" fill="none"><rect x="6" y="10" width="8" height="22" stroke="currentColor" stroke-width="1.2"/><rect x="16" y="6" width="8" height="26" stroke="currentColor" stroke-width="1.2"/><rect x="26" y="14" width="8" height="18" stroke="currentColor" stroke-width="1.2"/></svg>` },
+      { lab:'知识—权力', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M8 28c6-10 18-10 24 0" stroke="currentColor" stroke-width="1.3"/><circle cx="14" cy="14" r="5" stroke="currentColor"/><circle cx="26" cy="14" r="5" stroke="currentColor"/><path d="M20 19v8" stroke="currentColor" stroke-width="1.2"/></svg>` },
+      { lab:'历史他者', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M6 20h28M20 6v28" stroke="currentColor" stroke-width="1" stroke-dasharray="3 2"/><circle cx="14" cy="14" r="4" stroke="currentColor"/><circle cx="28" cy="26" r="4" stroke="currentColor" fill="currentColor" opacity=".2"/></svg>` }
+    ]},
+    { sub:'本讲视觉提要 · 前现代造物', items:[
+      { lab:'道器合一', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M10 28h20v6H10v-6z" stroke="currentColor" stroke-width="1.3"/><path d="M14 14h12l4 14H10l4-14z" stroke="currentColor" stroke-width="1.2"/></svg>` },
+      { lab:'天时·地气', svg:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="12" r="6" stroke="currentColor"/><path d="M8 32c4-8 20-8 24 0" stroke="currentColor" stroke-width="1.2"/></svg>` },
+      { lab:'材美·工巧', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M6 28L20 8l14 20H6z" stroke="currentColor" stroke-width="1.3"/><path d="M14 28h12" stroke="currentColor"/></svg>` },
+      { lab:'用之美', svg:`<svg viewBox="0 0 40 40" fill="none"><ellipse cx="20" cy="22" rx="12" ry="8" stroke="currentColor" stroke-width="1.3"/><path d="M14 10c2-4 10-4 12 0" stroke="currentColor"/></svg>` }
+    ]},
+    { sub:'本讲视觉提要 · 现代设计诞生', items:[
+      { lab:'水晶宫 1851', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M6 28h28V14l-14-8-14 8v14z" stroke="currentColor" stroke-width="1.3"/><path d="M6 18h28M20 6v22" stroke="currentColor" stroke-width=".8" opacity=".6"/></svg>` },
+      { lab:'手工艺↔机器', svg:`<svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="10" height="16" stroke="currentColor"/><circle cx="29" cy="20" r="8" stroke="currentColor"/><path d="M16 20h7" stroke="currentColor" stroke-width="1.2"/></svg>` },
+      { lab:'装饰之辩', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M8 20c4-8 20-8 24 0" stroke="currentColor"/><path d="M12 24c8 4 16-4 16 4" stroke="currentColor" stroke-width=".9"/></svg>` },
+      { lab:'科隆论战', svg:`<svg viewBox="0 0 40 40" fill="none"><rect x="6" y="10" width="12" height="20" stroke="currentColor"/><rect x="22" y="10" width="12" height="20" stroke="currentColor"/><path d="M18 20h4" stroke="currentColor" stroke-width="1.5"/></svg>` }
+    ]},
+    { sub:'本讲视觉提要 · 包豪斯', items:[
+      { lab:'三阶段', svg:`<svg viewBox="0 0 40 40" fill="none"><rect x="4" y="16" width="10" height="12" rx="1" stroke="currentColor"/><rect x="15" y="12" width="10" height="16" rx="1" stroke="currentColor"/><rect x="26" y="18" width="10" height="10" rx="1" stroke="currentColor"/></svg>` },
+      { lab:'艺术·技术', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M8 28L20 8l12 20" stroke="currentColor" stroke-width="1.3"/><circle cx="20" cy="22" r="5" stroke="currentColor"/></svg>` },
+      { lab:'神话解构', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M20 6l16 10v12L20 38 4 28V16L20 6z" stroke="currentColor" stroke-width="1.2"/><path d="M20 14v12" stroke="currentColor" stroke-dasharray="2 2"/></svg>` },
+      { lab:'冷战叙事', svg:`<svg viewBox="0 0 40 40" fill="none"><circle cx="14" cy="20" r="8" stroke="currentColor"/><circle cx="26" cy="20" r="8" stroke="currentColor"/><path d="M18 20h4" stroke="currentColor" stroke-width="1.2"/></svg>` }
+    ]},
+    { sub:'本讲视觉提要 · 消费与设计', items:[
+      { lab:'有计划废止', svg:`<svg viewBox="0 0 40 40" fill="none"><rect x="8" y="10" width="24" height="18" rx="2" stroke="currentColor"/><path d="M12 28v4M20 28v4M28 28v4" stroke="currentColor"/><path d="M14 14h12" stroke="currentColor" stroke-dasharray="3 2"/></svg>` },
+      { lab:'符号价值', svg:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="6" stroke="currentColor"/><circle cx="20" cy="20" r="12" stroke="currentColor" stroke-dasharray="2 3"/><path d="M20 8v4M20 28v4M8 20h4M28 20h4" stroke="currentColor" stroke-width="1"/></svg>` },
+      { lab:'设计民主', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M8 30c4-10 20-10 24 0" stroke="currentColor"/><circle cx="14" cy="16" r="4" stroke="currentColor"/><circle cx="26" cy="16" r="4" stroke="currentColor"/></svg>` },
+      { lab:'两种体制', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M6 12h14v20H6V12zM22 16h12v12H22V16z" stroke="currentColor" stroke-width="1.2"/></svg>` }
+    ]},
+    { sub:'本讲视觉提要 · 后现代', items:[
+      { lab:'元叙事终结', svg:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="currentColor" stroke-dasharray="4 3"/><path d="M10 20h20" stroke="currentColor"/></svg>` },
+      { lab:'双重编码', svg:`<svg viewBox="0 0 40 40" fill="none"><rect x="6" y="10" width="12" height="20" stroke="currentColor"/><rect x="22" y="14" width="12" height="12" stroke="currentColor"/></svg>` },
+      { lab:'孟菲斯', svg:`<svg viewBox="0 0 40 40" fill="none"><rect x="8" y="18" width="10" height="10" transform="rotate(-12 13 23)" stroke="currentColor"/><circle cx="28" cy="14" r="6" stroke="currentColor"/><path d="M6 32h28" stroke="currentColor"/></svg>` },
+      { lab:'设计伦理', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M20 6l14 8v12L20 34 6 26V14L20 6z" stroke="currentColor" stroke-width="1.2"/><path d="M20 14v12" stroke="currentColor"/></svg>` }
+    ]},
+    { sub:'本讲视觉提要 · 全球化', items:[
+      { lab:'文化混杂', svg:`<svg viewBox="0 0 40 40" fill="none"><circle cx="14" cy="20" r="10" stroke="currentColor" opacity=".7"/><circle cx="26" cy="20" r="10" stroke="currentColor"/></svg>` },
+      { lab:'事理学', svg:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="5" stroke="currentColor"/><path d="M10 30c3-8 17-8 20 0" stroke="currentColor"/><rect x="16" y="22" width="8" height="6" stroke="currentColor"/></svg>` },
+      { lab:'社会创新', svg:`<svg viewBox="0 0 40 40" fill="none"><circle cx="12" cy="20" r="5" stroke="currentColor"/><circle cx="28" cy="14" r="5" stroke="currentColor"/><circle cx="28" cy="26" r="5" stroke="currentColor"/><path d="M16 18l8-3M16 22l8 3" stroke="currentColor"/></svg>` },
+      { lab:'话语地理', svg:`<svg viewBox="0 0 40 40" fill="none"><ellipse cx="20" cy="22" rx="14" ry="10" stroke="currentColor"/><path d="M10 12h20M14 8h12" stroke="currentColor" stroke-width=".9"/></svg>` }
+    ]},
+    { sub:'本讲视觉提要 · 数字与伦理', items:[
+      { lab:'可持续三代', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M6 28h28" stroke="currentColor"/><circle cx="12" cy="22" r="5" stroke="currentColor"/><circle cx="20" cy="16" r="5" stroke="currentColor"/><circle cx="28" cy="22" r="5" stroke="currentColor"/></svg>` },
+      { lab:'UED / 黑暗模式', svg:`<svg viewBox="0 0 40 40" fill="none"><rect x="8" y="8" width="24" height="18" rx="2" stroke="currentColor"/><path d="M14 28h12l-2 6h-8l-2-6z" stroke="currentColor"/><circle cx="20" cy="16" r="3" stroke="currentColor"/></svg>` },
+      { lab:'推测设计', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M8 30c6-14 18-14 24 0" stroke="currentColor" stroke-dasharray="3 2"/><circle cx="20" cy="14" r="5" stroke="currentColor"/><path d="M18 19l-4 8" stroke="currentColor"/></svg>` },
+      { lab:'双碳·生态文明', svg:`<svg viewBox="0 0 40 40" fill="none"><path d="M20 6c-6 10-6 18 0 28M12 14c4 6 4 10 0 16M28 14c-4 6-4 10 0 16" stroke="currentColor" stroke-width="1.2"/></svg>` }
+    ]}
+  ];
+  const b=blocks[i]||blocks[0];
+  return `<div class="chapter-visual-bar mb-8">
+    <p class="font-mono text-[10px] text-amber-700 tracking-widest uppercase mb-3">${b.sub}</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      ${b.items.map(it=>`<div class="viz-item"><div class="viz-svg-wrap mx-auto">${it.svg}</div><span class="text-[11px] text-ink-600 leading-tight">${it.lab}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+/** 段落旁小型插图 + 一句提要，强化信息可视化 */
+function inlineSpot(title, bodyHtml, svgInner){
+  return `<div class="inline-spot-illus">
+    <div class="spot-svg" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">${svgInner}</svg></div>
+    <div class="spot-text"><p class="text-xs font-bold text-amber-900 mb-1">${title}</p>${bodyHtml}</div>
+  </div>`;
+}
 
 // ========== RENDER HOME CARDS ==========
 function renderCards(){
@@ -311,10 +396,28 @@ function initAccordions(){
   document.querySelectorAll('.accordion-header').forEach(h=>{ h.classList.remove('open'); h.nextElementSibling.classList.remove('open'); });
 }
 
-// ========== DETAIL HEADER ==========
-function detailHeader(i){
+/** 正文内信息图形（images/N-M.png），与章节内容穿插 */
+function infographicFigure(lectureNum,suffix){
+  return `<figure class="infographic-embed my-8 rounded-xl overflow-hidden border border-ink-200/90 shadow-md shadow-ink-900/5 bg-white/95 p-2 sm:p-3">
+    <img src="images/${lectureNum}-${suffix}.png" alt="第${lectureNum}讲 信息图形 ${lectureNum}-${suffix}" class="w-full h-auto object-contain max-h-[min(920px,88vh)] mx-auto" loading="lazy" />
+  </figure>`;
+}
+
+// ========== DETAIL HEADER（右侧主图：images/N-1.png；第6—8讲仅一张图时改在正文全宽展示，此处不显示侧栏图）==========
+function detailHeader(i, opts){
+  const hideSide=opts&&opts.hideSideFigure;
   const l=L[i];
   const cn=['一','二','三','四','五','六','七','八'][i];
+  const src=`images/${i+1}-1.png`;
+  const figCaption=l.keywords.slice(0,4).join(' · ');
+  const sideFig=hideSide?'':`
+        <figure class="detail-figure-wrap w-full lg:w-[min(100%,420px)] lg:flex-shrink-0 mt-10 lg:mt-0 flex flex-col">
+          <div class="detail-figure-frame relative flex-1 min-h-[200px] rounded-2xl overflow-hidden border border-ink-200/90 bg-white shadow-md shadow-ink-900/8 aspect-[4/3] lg:aspect-auto lg:min-h-[280px] flex items-center justify-center p-2">
+            <img src="${src}" alt="${l.title}" class="detail-figure-img relative z-[1] w-full h-full max-h-[min(420px,50vh)] object-contain object-center" onerror="this.style.display='none';var fb=this.nextElementSibling;fb.classList.remove('hidden');fb.setAttribute('aria-hidden','true');" />
+            <div class="detail-figure-fallback hidden absolute inset-0 flex items-center justify-center p-10 bg-gradient-to-br from-white to-ink-50/80" style="color:${l.color}"><div class="detail-figure-pattern">${patterns[i]}</div></div>
+          </div>
+          <figcaption class="mt-2.5 text-xs text-ink-500 leading-snug text-center lg:text-left line-clamp-2">${figCaption}</figcaption>
+        </figure>`;
   return `
   <div class="hero-pattern py-12 px-6">
     <div class="max-w-5xl mx-auto">
@@ -322,14 +425,18 @@ function detailHeader(i){
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
         返回课程首页
       </a>
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-3xl">${l.icon}</span>
-        <span class="font-mono text-xs text-amber-700 tracking-[.15em]">第${cn}讲 · LECTURE ${l.n}</span>
+      <div class="flex flex-col lg:flex-row lg:gap-10 lg:items-stretch">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-3 mb-4">
+            ${lectureHeroIconMarkup(i)}
+            <span class="font-mono text-xs text-amber-700 tracking-[.15em]">第${cn}讲 · LECTURE ${l.n}</span>
+          </div>
+          <h1 class="font-display text-4xl lg:text-5xl font-bold text-ink-800 mb-3">${l.title}</h1>
+          <p class="text-xl text-amber-800/95 mb-4">${l.sub}</p>
+          <p class="text-ink-600 text-sm max-w-2xl leading-relaxed">${l.desc}</p>
+          <div class="flex flex-wrap gap-2 mt-6">${l.keywords.map(k=>`<span class="px-3 py-1 rounded-full text-xs bg-white text-ink-700 border border-ink-200 shadow-sm">${k}</span>`).join('')}</div>
+        </div>${sideFig}
       </div>
-      <h1 class="font-display text-4xl lg:text-5xl font-bold text-ink-800 mb-3">${l.title}</h1>
-      <p class="text-xl text-amber-800/95 mb-4">${l.sub}</p>
-      <p class="text-ink-600 text-sm max-w-2xl leading-relaxed">${l.desc}</p>
-      <div class="flex flex-wrap gap-2 mt-6">${l.keywords.map(k=>`<span class="px-3 py-1 rounded-full text-xs bg-white text-ink-700 border border-ink-200 shadow-sm">${k}</span>`).join('')}</div>
     </div>
   </div>`;
 }
@@ -339,7 +446,8 @@ function detailHeader(i){
 // ===================================================================
 function renderDetail(i){
   const fns=[renderL1,renderL2,renderL3,renderL4,renderL5,renderL6,renderL7,renderL8];
-  return detailHeader(i) + `<div class="max-w-5xl mx-auto px-6 py-10 pb-16 bg-[#f5f0e8]">${renderTeachingMetaBanner(i)}${renderToolBoxDoc(i)}${fns[i]()}</div>`;
+  const hideSide=i>=5;
+  return detailHeader(i,{hideSideFigure:hideSide}) + `<div class="max-w-5xl mx-auto px-6 py-10 pb-16 bg-[#f5f0e8]">${renderTeachingMetaBanner(i)}${renderChapterVisualBar(i)}${renderToolBoxDoc(i)}${fns[i]()}</div>`;
 }
 
 // ==================== LECTURE 1 ====================
@@ -349,6 +457,7 @@ function renderL1(){
   ${para('设计史作为一门学科，其研究对象表面上是已经发生的历史事件与历史现象，但任何有方法论自觉的研究者都清楚：历史书写从来不是对过去的中立记录，而是在特定的认识论框架下，对特定史料进行特定方式的选择、组织与阐释的主动建构过程。')}
   ${quoteBox('设计史不是一个中性的知识积累过程，而是一个充满价值判断、利益关系与权力运作的学术话语场域。历史学家所做的每个叙事选择都携带着某种意识形态的指向。','约翰·沃克（John A. Walker）《设计史与设计的历史》1989')}
   ${para('本讲的根本目标不在于传授具体的历史知识，而在于为后续七讲提供一套可操作的方法论工具箱——使学生在进入任何设计史文本时，均能自动追问：这是谁的叙事？依据何种方法论？遮蔽了哪些声音？')}
+  ${infographicFigure(1,2)}
 
   ${sectionTitle('设计史的学科化历程')}
   <div id="chart-l1-timeline" style="width:100%;height:300px;" class="my-6 rounded-xl bg-white/95 border border-ink-200 shadow-sm p-2"></div>
@@ -364,6 +473,7 @@ function renderL1(){
     <div class="concept-box text-center flex-1"><p class="text-amber-700 font-bold mb-1">设计批评</p><p class="text-xs text-ink-600">当代实践的价值判断</p></div>
   </div>
   ${para('三者并非等级关系，而是相互支撑的知识生态：没有史学基础的理论是无根之木；没有理论工具的历史是盲目的陈列；没有批评介入的史论研究则丧失了与当代实践的对话能力。')}
+  ${inlineSpot('知识生态示意', '<p class="text-ink-600 text-xs leading-relaxed m-0">设计史、设计理论、设计批评形成三角互锁：史学提供可验证的脉络，理论提供可反思的透镜，批评将过去与当下实践焊接。</p>', '<circle cx="32" cy="22" r="12" stroke="currentColor" stroke-width="1.4"/><circle cx="20" cy="42" r="12" stroke="currentColor" stroke-width="1.4"/><circle cx="44" cy="42" r="12" stroke="currentColor" stroke-width="1.4"/><path d="M28 30L8 20M36 30L56 20M32 34v8" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>')}
 
   ${sectionTitle('五大史学流派')}
   <div id="chart-l1-radar" style="width:100%;height:380px;" class="my-6 rounded-xl bg-white/95 border border-ink-200 shadow-sm p-2"></div>
@@ -374,7 +484,8 @@ function renderL1(){
     ${conceptBox('全球史视角','质疑欧美中心主义叙事框架，建立多元文明设计史的平行叙事。代表：马戈林《世界设计史》。回应知识地理的不对称性。')}
     ${conceptBox('设计批评独立范畴','主张设计批评应建立不同于艺术批评的独立评价标准与概念工具。设计不能被简化为"应用艺术"的子类。')}
   </div>
-  ${subTitle('五大流派方法论比较表（文档）')}
+  ${infographicFigure(1,3)}
+  ${subTitle('五大流派方法论比较表')}
   ${dataTable(['流派','核心问题','研究对象','方法论优势','关键局限'],[
     ['英雄天才史观','谁创造了好设计？','精英设计师与风格演化','叙事清晰、人物鲜活','遮蔽社会语境与无名者'],
     ['社会史批判','设计如何编码社会关系？','设计物的意识形态功能','揭示权力与阶级维度','过度结构决定论'],
@@ -383,8 +494,8 @@ function renderL1(){
     ['设计批评','当代设计的价值判断','设计话语与实践','当代介入性强','缺乏历史纵深']
   ])}
 
-  ${sectionTitle('王受之式通史与本土路径：中国设计史书写的自主性（文档）')}
-  ${para('王受之《世界现代设计史》在院校中使用广泛，其叙事框架基本沿袭佩夫斯纳英雄史观，以欧美为主线，中国内容常以附录出现——这本身是值得分析的史学立场问题。杭间、李砚祖等学者以中国工艺美学史、设计艺术学为核心，建构具有独立问题意识的本土叙事。"中国设计史"与"设计的中国史"表述隐含不同立场：前者以中国实践与文化逻辑为主体；后者可能仍以西方"设计"概念为框，将中国经验填入其中（文档）。')}
+  ${sectionTitle('王受之式通史与本土路径：中国设计史书写的自主性')}
+  ${para('王受之《世界现代设计史》在院校中使用广泛，其叙事框架基本沿袭佩夫斯纳英雄史观，以欧美为主线，中国内容常以附录出现——这本身是值得分析的史学立场问题。杭间、李砚祖等学者以中国工艺美学史、设计艺术学为核心，建构具有独立问题意识的本土叙事。"中国设计史"与"设计的中国史"表述隐含不同立场：前者以中国实践与文化逻辑为主体；后者可能仍以西方"设计"概念为框，将中国经验填入其中。')}
 
   ${sectionTitle('代表理论家')}
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
@@ -400,6 +511,7 @@ function renderL1(){
   <div class="space-y-3 my-6">
     ${['这是谁的叙事？作者的学术训练与文化位置是什么？','依据何种方法论？属于五大流派中的哪一个或哪几个？','遮蔽了哪些声音？哪些设计实践、哪些地区、哪些群体被排除在叙事之外？','叙事服务于何种价值主张？是否存在隐含的意识形态指向？','在中国语境中如何定位？西方叙事框架对中国设计经验的解释力与盲区各是什么？'].map((t,i)=>`<div class="flex items-start gap-3 p-3 rounded-lg bg-white/95 border border-ink-200 shadow-sm"><span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-700 text-xs flex items-center justify-center font-bold flex-shrink-0">${i+1}</span><p class="text-sm text-ink-700">${t}</p></div>`).join('')}
   </div>
+  ${infographicFigure(1,4)}
 
   ${renderReadingSeminar(0)}
   ${sectionTitle('课程思政专栏：史学话语权与文化主体性')}
@@ -441,13 +553,14 @@ function renderL2(){
 
   ${sectionTitle('欧洲行会传统与技术知识论')}
   ${theoristCard('帕梅拉·朗','','技术知识认识论研究者','揭示了欧洲知识史的重要盲区：前现代工匠所积累的实践性技术知识，因"理论知识优于实践知识"的认识论等级确立，被系统性地降格与边缘化。')}
-  ${para('欧洲中世纪行会通过严格师徒制度、学徒期限、"杰作"（masterpiece）制度等规范工艺标准，也建立知识垄断。文艺复兴时期"艺术家—工匠"身份分裂，当"自由艺术"与"机械艺术"建立等级，手工艺被降格为次等知识形式，预埋了19世纪工艺美术运动将要回应的根本矛盾（文档）。')}
+  ${para('欧洲中世纪行会通过严格师徒制度、学徒期限、"杰作"（masterpiece）制度等规范工艺标准，也建立知识垄断。文艺复兴时期"艺术家—工匠"身份分裂，当"自由艺术"与"机械艺术"建立等级，手工艺被降格为次等知识形式，预埋了19世纪工艺美术运动将要回应的根本矛盾。')}
 
-  ${sectionTitle('官作与民作、伊斯兰几何装饰（文档）')}
+  ${sectionTitle('官作与民作、伊斯兰几何装饰')}
   ${para('中国传统造物在制度层面呈现"官作"与"民作"双轨并行：官营手工业（宫廷造办处、御窑厂等）以礼制需求为核心，追求工艺极致与等级秩序的物质化；民间工艺以功能实用与审美满足为主导，在日常生活的广阔场域中积累无名工匠的集体智慧。')}
-  ${para('伊斯兰视觉文化中的几何装饰体系与欧洲透视主义传统截然不同：教义对偶像崇拜的禁止使创造力导向几何图案的无限变奏——数学的严格秩序与宗教精神的超验追求在装饰中融合。它揭示：设计的形式语言与文化—宗教—哲学语境深度捆绑，没有脱离文化土壤的"普世形式语言"；这一认识将在讨论现代主义"普世性"时提供反驳视角（文档）。')}
+  ${para('伊斯兰视觉文化中的几何装饰体系与欧洲透视主义传统截然不同：教义对偶像崇拜的禁止使创造力导向几何图案的无限变奏——数学的严格秩序与宗教精神的超验追求在装饰中融合。它揭示：设计的形式语言与文化—宗教—哲学语境深度捆绑，没有脱离文化土壤的"普世形式语言"；这一认识将在讨论现代主义"普世性"时提供反驳视角。')}
 
   ${sectionTitle('四大文明造物哲学比较')}
+  ${inlineSpot('比较维度提示', '<p class="text-ink-600 text-xs leading-relaxed m-0">下图柱状图从「整体性—自然观—工艺—数学—美用—知识形态」六维粗略量化四种文明造物哲学的相对强调，用于课堂讨论而非实证测量。</p>', '<rect x="12" y="14" width="40" height="36" rx="3" stroke="currentColor" stroke-width="1.3"/><path d="M18 22h28M18 30h22M18 38h26" stroke="currentColor" stroke-width="1" opacity=".6"/><circle cx="46" cy="18" r="5" stroke="currentColor"/>')}
   <div id="chart-l2-compare" style="width:100%;height:400px;" class="my-6 rounded-xl bg-white/95 border border-ink-200 shadow-sm p-2"></div>
   ${dataTable(['维度','中国','日本','欧洲','伊斯兰'],[
     ['造物核心','道器合一','用之美','技艺征服','数学神圣'],
@@ -456,6 +569,7 @@ function renderL2(){
     ['设计意识','系统整合','材料顺应','形式赋予','几何理性'],
     ['与自然关系','顺应参与','谦逊显现','征服改造','秩序映射']
   ])}
+  ${infographicFigure(2,2)}
 
   ${sectionTitle('传统转化的两条路径')}
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
@@ -486,11 +600,14 @@ function renderL3(){
     <div class="flow-arrow">→</div>
     <div class="concept-box text-center px-5 py-4 min-w-[160px]"><p class="text-amber-700 font-bold text-sm">功能主义</p><p class="text-[10px] text-ink-500 mt-1">形式追随功能</p></div>
   </div>
+  ${inlineSpot('改革运动时间轴', '<p class="text-ink-600 text-xs leading-relaxed m-0">下图将 1851 水晶宫至 1914 科隆论战的关键节点串联：每一波运动既回应上一波矛盾，也孕育新的张力（手工艺↔机器、装饰↔理性）。</p>', '<path d="M8 36h48M14 36V20M26 36V14M38 36V24M50 36V18" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="14" cy="20" r="4" stroke="currentColor"/><circle cx="26" cy="14" r="4" stroke="currentColor"/><circle cx="38" cy="24" r="4" stroke="currentColor"/><circle cx="50" cy="18" r="4" stroke="currentColor"/>')}
+  <div id="chart-l3-timeline" style="width:100%;height:280px;" class="my-6 rounded-xl bg-white/95 border border-ink-200 shadow-sm p-2"></div>
+  ${infographicFigure(3,2)}
 
-  ${subTitle('新艺术运动的地理差异（文档）')}
+  ${subTitle('新艺术运动的地理差异')}
   ${para('新艺术运动在1890—1910年间席卷欧洲，但在不同地理与文化语境中形态逻辑不同：法国—比利时传统以赫克托·吉马尔的巴黎地铁站、维克托·霍尔塔的布鲁塞尔建筑为代表，以有机植物曲线强调流动性与室内外整体统一；维也纳分离派在吸收新艺术有机主义的同时逐渐趋向更为克制的几何形式，维也纳工坊（Wiener Werkstätte，1903）是这一转变的制度体现，也是后来包豪斯精神的重要前身。同一时代精神可在不同土壤中生长出迥异设计语言——这是反对形式风格决定论、支持文化语境分析的有力例证。')}
   ${para('亨利·科尔与理查德·雷德格雷夫等对1851年展览品问题的批判回应，推动了南肯辛顿博物馆体系（今维多利亚与艾尔伯特博物馆）的创建，确立了"通过设计教育改善工业制品质量"的政策框架——现代设计教育体系的最早制度原型之一。')}
-  ${subTitle('中国线索：南洋劝业会与“实业救国”（文档）')}
+  ${subTitle('中国线索：南洋劝业会与“实业救国”')}
   ${para('1851年伦敦举办世界博览会时，中国正深陷鸦片战争后的历史创伤与社会动荡。在设计与工艺领域，"实业救国"催生工艺改良举措。1910年南京南洋劝业会是中国有史以来第一次大规模工业与工艺展览，常被视为中国的"水晶宫时刻"——以展示迫使近代设计与工艺面对自身与工业文明之间的落差。"中学为体，西学为用"在工艺领域折射的问题——技术能否单独引进，审美与价值观是否须一并接受——在今日全球化语境中仍具尖锐性。')}
 
   ${sectionTitle('工艺美术运动：审美改革即道德改革')}
@@ -514,6 +631,7 @@ function renderL3(){
       <p class="text-ink-600 text-xs leading-relaxed">标准化是对艺术家创造个性的摧毁。设计的生命力来自艺术家的个人精神力量，类型化将导致平庸主义的胜利。</p>
     </div>
   </div>
+  ${infographicFigure(3,3)}
 
   ${sectionTitle('中国设计的现代化转型')}
   ${theoristCard('庞薰琹','1906—1985','中国第一代现代设计教育家','1925年赴法留学，回国后参与创办中央工艺美术学院。核心思想"中西会通"：在深度理解中国传统装饰造型逻辑的基础上，融入现代设计的组织原则与功能意识。')}
@@ -534,6 +652,7 @@ function renderL4(){
   ${quoteBox('包豪斯在话语上宣扬机器美学，但在实践中却常常以手工艺方式生产"看起来像机器产品"的物品。这是现代主义叙事中最核心的一个悖论。','雷纳·班纳姆（Reyner Banham）1960')}
 
   ${sectionTitle('包豪斯的三个历史阶段')}
+  ${inlineSpot('魏玛—德绍—柏林', '<p class="text-ink-600 text-xs leading-relaxed m-0">三阶段并非同一「包豪斯精神」的线性深化，而是路线更替：表现主义预科、工业理性与极简美学先后占据中心，各自携带不同的社会想象。</p>', '<path d="M10 40V16l10-6 10 6v24" stroke="currentColor" stroke-width="1.3" fill="none"/><rect x="8" y="18" width="6" height="18" stroke="currentColor"/><rect x="19" y="14" width="6" height="22" stroke="currentColor"/><rect x="30" y="20" width="6" height="16" stroke="currentColor"/>')}
   <div id="chart-l4-timeline" style="width:100%;height:280px;" class="my-6 rounded-xl bg-white/95 border border-ink-200 shadow-sm p-2"></div>
   ${dataTable(['阶段','时间','城市','校长','核心特征'],[
     ['魏玛阶段','1919—1925','魏玛','格罗皮乌斯','表现主义+手工艺浪漫主义，伊顿预科课程'],
@@ -566,8 +685,9 @@ function renderL4(){
       <p class="text-ink-600 text-xs leading-relaxed">神话化由三大制度力量驱动：流亡知识分子的话语掌控、冷战文化政治、MoMA的制度性推广。</p>
     </div>
   </div>
+  ${infographicFigure(4,2)}
 
-  ${sectionTitle('三任校长、政治语境与国际扩散（文档）')}
+  ${sectionTitle('三任校长、政治语境与国际扩散')}
   ${para('包豪斯历史不是同质化的现代主义实验，而是三种现代主义路线在教育机构中的更替：格罗皮乌斯时期以《包豪斯宣言》提出"全面艺术作品"理想，早期师傅制度双轨教学试图重建理论与实践整合。汉斯·迈耶（1928—1930）以功能主义与集体主义取代个人主义，强调设计服务于社会大众而非精英趣味，"形式服从功能"在此变为"形式服从社会需求"的激进主张，因其左翼色彩成为被迫离职的重要原因。密斯（1930—1933）将包豪斯引向高度纯化的美学，以"少即是多"将功能主义推向近乎唯美主义极致，与早期民主设计理想已相去甚远。')}
   ${para('纳粹以"文化布尔什维克主义"指控打压包豪斯——国际主义、反民族主义与左翼师资使其成为文化政策眼中钉；1933年关闭是政治迫害。教师流亡美国后在哈佛、芝加哥、麻省理工等重建阵地。冷战中美方将包豪斯包装为"自由世界设计创造力"以对抗苏联社会主义现实主义，原本充满矛盾的历史被简化为艺术自由对抗政治压制的英雄叙事。')}
   ${para('瑞士国际主义平面设计（约瑟夫·米勒—布罗克曼与格网系统）将秩序美学推向印刷媒介；乌尔姆造型学院（1953—1968）在托马斯·马尔多纳多领导下将设计建立在系统论、信息论与符号学基础上，与布劳恩合作孕育拉姆斯的理性主义语言。日本战后在接受现代主义的同时将其与传统美学整合，"优良设计奖"（1957年）是重要制度标志。')}
@@ -604,8 +724,9 @@ function renderL5(){
     ${conceptBox('质量性废止','产品被有意设计为在特定使用周期后物理损坏。历史案例：1924年灯泡卡特尔将灯泡寿命限定在1000小时。')}
     ${conceptBox('风格性废止','产品外观风格被周期性更换，使功能完好的旧款在视觉上显得过时。典型：通用汽车年度车型更新策略。')}
   </div>
+  ${infographicFigure(5,2)}
 
-  ${subTitle('美国消费主义：年度款式与流线型（文档）')}
+  ${subTitle('美国消费主义：年度款式与流线型')}
   ${para('战后美国经济高速扩张，以消费主义为核心动力。通用汽车在设计总监哈利·厄尔（Harley Earl）主导下确立的"年度款式更新"体系，是消费主义设计逻辑的制度性结晶：通过每年对汽车外观进行有限度改款，在技术性能未有实质提升的情况下，制造消费者对既有产品的"过时感"，从而驱动新一轮购买欲望。')}
   ${theoristCard('雷蒙德·罗维','1893—1986','美国工业设计的时代符号','流线型美学（Streamlining）以空气动力学形态为外壳，横跨交通工具、家电、消费品与企业形象，成为战后美国消费社会的视觉符号。罗维对设计的定义极为直白："最美的曲线是销售上升的曲线"——这不是设计伦理的沦丧，而是对消费主义设计逻辑的诚实表述。')}
 
@@ -618,6 +739,8 @@ function renderL5(){
     <div class="text-ink-500">+</div>
     <div class="concept-box text-center px-6 py-4 border-amber-500/30"><p class="text-amber-700 font-bold">符号价值</p><p class="text-[10px] text-ink-500 mt-1">身份标识·鲍德里亚</p></div>
   </div>
+  ${inlineSpot('价值维度叠加', '<p class="text-ink-600 text-xs leading-relaxed m-0">消费社会中，设计物常在「能用」之外叠加「可晒」「可圈层识别」的符号层；战后美国年度车型则是将「尚能使用」拖入「看起来过时」的典型机制。</p>', '<circle cx="32" cy="32" r="22" stroke="currentColor" stroke-width="1.2" opacity=".35"/><circle cx="32" cy="32" r="14" stroke="currentColor" stroke-width="1.3"/><circle cx="32" cy="32" r="6" fill="currentColor" opacity=".25"/>')}
+  ${infographicFigure(5,3)}
 
   ${sectionTitle('好设计运动与拉姆斯十原则')}
   ${theoristCard('迪特·拉姆斯','1932—','功能主义美学的最后大师','在博朗公司连续工作40余年。将"好设计"系统化为十项原则。第十项"少，但更好"是对密斯"少即是多"的谦逊回应。乔纳森·艾夫公开承认其对苹果设计的决定性影响。')}
@@ -625,7 +748,7 @@ function renderL5(){
     ${['好的设计是创新的','好的设计使产品有用','好的设计是美的','好的设计使产品易于理解','好的设计是谦逊的','好的设计是诚实的','好的设计是持久的','好的设计贯彻到每个细节','好的设计是关注环境的','好的设计是尽可能少的设计'].map((p,i)=>`<div class="flex items-center gap-3 p-3 rounded-lg bg-white/95 border border-ink-200 shadow-sm"><span class="w-7 h-7 rounded bg-amber-500/15 text-amber-700 text-xs flex items-center justify-center font-mono font-bold flex-shrink-0">${String(i+1).padStart(2,'0')}</span><p class="text-sm text-ink-700">${p}</p></div>`).join('')}
   </div>
 
-  ${sectionTitle('欧洲的多元路径与日本战后设计（文档）')}
+  ${sectionTitle('欧洲的多元路径与日本战后设计')}
   ${para('意大利"设计奇迹"在工业基础薄弱背景下，以小规模精密制造业与深厚人文艺术传统为基础，发展出强调诗意、优雅与材料感知的设计美学；阿基勒·卡斯蒂廖尼的"再设计"（redesign）将现成工业品转化为新的设计语境，是意大利设计创造力的典型表达。')}
   ${para('斯堪的纳维亚"设计民主化"在北欧福利国家政策框架下获得真实制度支撑——国家通过公共采购、设计标准与设计教育补贴，系统性地将优质设计引入普通家庭。宜家是这一传统全球影响力最大的商业化体现，但其全球扩张也引发"民主化"话语的内在矛盾：将斯堪的纳维亚中产阶级审美推广为全球"好品味"标准，是民主还是新的文化同质化？')}
   ${para('日本战后设计是20世纪最引人注目的产业升级案例之一：索尼以特立斯顿便携式收音机（TR-55，1955年）开创日本消费电子的全球化路径；本田以摩托车与汽车设计证明日本制造在技术可靠性与设计合理性上超越西方原型的能力。深层逻辑不仅是技术追赶，更是将"间""侘寂""素材感"等美学概念内化进工业产品形态——形式上符合国际市场对"现代"的预期，精神气质上保留无可替代的文化辨识度。"优良设计奖"体系（1957年）是日本设计现代化的制度性标志。')}
@@ -640,6 +763,7 @@ function renderL5(){
     ['价值导向','以人民为中心','以市场为中心']
   ])}
   <div id="chart-l5-radar" style="width:100%;height:380px;" class="my-6 rounded-xl bg-white/95 border border-ink-200 shadow-sm p-2"></div>
+  ${infographicFigure(5,4)}
 
   ${renderReadingSeminar(4)}
   ${sectionTitle('课程思政专栏：社会主义设计观的历史坐标与当代意义')}
@@ -652,10 +776,13 @@ function renderL5(){
 // ==================== LECTURE 6 ====================
 function renderL6(){
   return `
+  ${infographicFigure(6,1)}
   ${sectionTitle('引言：功能主义的危机')}
   ${quoteBox('我爱建筑的复杂性与矛盾性……我更偏爱"两者兼顾"而非"非此即彼"。活力源于不洁的统一。','罗伯特·文丘里《建筑的复杂性与矛盾性》1966')}
   ${para('文丘里将密斯的"少即是多"翻转为"少即是枯燥"（Less is a Bore）。后现代设计的历史由此开幕。危机根源：现代主义建成环境的社会失败、消费社会的意义需求、知识论基础的动摇。')}
 
+  ${inlineSpot('两种「少」', '<p class="text-ink-600 text-xs leading-relaxed m-0">下图从形式规范、历史引用、反讽、市场收编等维度对比现代主义与后现代话语的差异，帮助把握「少即是多」与「少即是乏味」之争的层次。</p>', '<path d="M16 44L32 8l16 36H16z" stroke="currentColor" stroke-width="1.4" fill="none"/><circle cx="32" cy="28" r="10" stroke="currentColor" stroke-dasharray="3 2"/>')}
+  <div id="chart-l6-radar" style="width:100%;height:340px;" class="my-6 rounded-xl bg-white/95 border border-ink-200 shadow-sm p-2"></div>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
     <div class="concept-box border-blue-500/30 text-center py-6">
       <p class="text-blue-600 font-display text-2xl font-bold italic">"Less is More"</p>
@@ -673,7 +800,7 @@ function renderL6(){
 
   ${sectionTitle('激进设计实践：孟菲斯集团')}
   ${theoristCard('埃托·索特萨斯','1917—2007','孟菲斯集团创始人','1981年创立孟菲斯集团，以鲜艳色彩、不规则几何、廉价材料的刻意组合，直接挑衅"好设计"的功能主义教条。这不是混乱，而是有目的的规则颠覆。')}
-  ${para('利奥塔在《后现代知识状况》（1979）中宣告"元叙事"失去合法性——宗教救赎史观、启蒙理性进步论、功能主义普世原则均不再自明。孟菲斯以"坏品味"为批评工具，却极短时间内被时尚与奢侈品市场收编——"反风格"成为最炙手可热的新风格。这一被收编的历史，是后现代与消费资本主义深层共谋的注脚：资本主义不怕反叛，它把反叛变成商品。超级工作室（Superstudio）与阿基佐姆（Archizoom）等则以乌托邦/反乌托邦视觉叙事，批判消费社会与设计工业的共谋（文档）。')}
+  ${para('利奥塔在《后现代知识状况》（1979）中宣告"元叙事"失去合法性——宗教救赎史观、启蒙理性进步论、功能主义普世原则均不再自明。孟菲斯以"坏品味"为批评工具，却极短时间内被时尚与奢侈品市场收编——"反风格"成为最炙手可热的新风格。这一被收编的历史，是后现代与消费资本主义深层共谋的注脚：资本主义不怕反叛，它把反叛变成商品。超级工作室（Superstudio）与阿基佐姆（Archizoom）等则以乌托邦/反乌托邦视觉叙事，批判消费社会与设计工业的共谋。')}
 
   ${sectionTitle('维克多·帕帕内克：设计伦理的奠基者')}
   ${theoristCard('维克多·帕帕内克','1923—1998','设计伦理的先知','维也纳出生的犹太难民，以《为真实世界的设计》（1971）对设计职业发起了最严厉的道德指控："工业设计师是仅次于广告设计师的最有害的职业。"')}
@@ -687,7 +814,7 @@ function renderL6(){
 
   ${sectionTitle('改革开放初期中国设计的转型')}
   ${para('1978年改革开放标志着中国设计的根本转折：设计从计划经济下"生产组织的服务工具"转向市场经济下"市场竞争的差异化手段"，这一功能转变在极短时间内完成，活跃与混乱并存。')}
-  ${para('深圳经济特区为当代设计提供了最重要实验场：内地设计人才在高度市场竞争下发展出兼具模仿速度与本土适应的工作方式。深圳从制造业城市向"设计之都"（UNESCO创意城市网络）的演变，是改革时代中国设计转型的代表性地理叙事。中国在后现代话语场域中的特殊处境亦值得讨论：当西方反思解构现代主义时，中国设计才大规模接受现代主义教育——这种"时差"既是历史错位，也可能构成独特创造的结构性条件（文档）。')}
+  ${para('深圳经济特区为当代设计提供了最重要实验场：内地设计人才在高度市场竞争下发展出兼具模仿速度与本土适应的工作方式。深圳从制造业城市向"设计之都"（UNESCO创意城市网络）的演变，是改革时代中国设计转型的代表性地理叙事。中国在后现代话语场域中的特殊处境亦值得讨论：当西方反思解构现代主义时，中国设计才大规模接受现代主义教育——这种"时差"既是历史错位，也可能构成独特创造的结构性条件。')}
   ${para('柳冠中"事理学"的提出，是在上述语境中建构中国本土设计理论的重要学术尝试。')}
 
   ${renderReadingSeminar(5)}
@@ -700,6 +827,7 @@ function renderL6(){
 // ==================== LECTURE 7 ====================
 function renderL7(){
   return `
+  ${infographicFigure(7,1)}
   ${sectionTitle('引言：两场同时发生的设计革命')}
   ${para('1989年柏林墙倒塌，1991年万维网诞生，1992年邓小平南巡讲话。三个事件共同开启了全球化新秩序，设计面临两场同时发生的根本性革命：设计的地理政治重构与数字技术的范式颠覆。')}
   ${quoteBox('我们不是缺少创新与技术，而是缺少方向感——在一个技术可能性远超人类理解速度的世界里，设计的根本任务是提供意义，而非提供解决方案。','约翰·萨卡拉《泡沫之中》2005')}
@@ -707,13 +835,13 @@ function renderL7(){
   ${sectionTitle('全球设计知识地理')}
   ${theoristCard('维克多·马戈林','1941—2019','全球设计史的书写者','伊利诺伊大学教授，《设计议题》创刊编辑，两卷本《世界设计史》（2015）是迄今规模最大的设计通史。系统挑战"设计史即欧美现代主义历史"的叙事框架。')}
 
-  ${sectionTitle('"中国设计"的叙事建构（文档）')}
+  ${sectionTitle('"中国设计"的叙事建构')}
   ${para('从"中国制造"到"中国设计"的转变不仅是经济升级，更是文化主权议题。国际奖项（红点、iF等）中中国作品的变化、国际期刊中中国设计研究的比例、UNESCO创意城市网络中北京、上海、深圳、武汉等的参与，勾勒出"走向国际"的轮廓，也提出深层问题：在评价框架仍由西方机构主导时，"走向国际"是真正的文化对话，还是进入他人设定的评价框架？')}
 
-  ${sectionTitle('南方国家话语与"新中式"辨析（文档）')}
+  ${sectionTitle('南方国家话语与"新中式"辨析')}
   ${para('圭·邦西耶佩的"设计帝国主义"揭示：发达国家以"设计援助"名义输出标准、审美与教育体系时，不仅是技术转移，更是文化价值观的单向植入。印度全国设计学院（NID，1961，乌尔姆协助建立）的现代主义制度移植与甘地手工纺纱传统之间的张力，是全球南方语境中"现代设计"与"民族传统"博弈的鲜明案例。')}
   ${para('"新中式"须区分：符号移植路径将纹样、器型、色彩系统直接用于外观差异化，市场有效不等于学术深度；价值激活路径将道器合一、"天有时地有气材有美工有巧"等原则内化为方法论，在现代技术语境中生长新形态，难度更高而文化说服力更持久。')}
-  ${para('柳冠中、娄永琪、许平、何人可等学者代表中国学界在理论原创与史论建构上的不同侧面；娄永琪团队将曼奇尼社会创新与中国城乡在地实践结合，形成具全球对话能力的路径（文档）。')}
+  ${para('柳冠中、娄永琪、许平、何人可等学者代表中国学界在理论原创与史论建构上的不同侧面；娄永琪团队将曼奇尼社会创新与中国城乡在地实践结合，形成具全球对话能力的路径。')}
 
   ${sectionTitle('设计方法论的系统化重建')}
   ${theoristCard('克劳斯·克里彭多夫','1932—2023','产品语义学创立者','《设计的意义》提出"语义学转向"：设计不是为物赋予功能，而是为人赋予理解——产品的形态应当传达其使用方式与文化意义。')}
@@ -743,6 +871,8 @@ function renderL7(){
     <div class="flow-arrow">→</div>
     <div class="concept-box text-center px-4 py-3"><p class="text-amber-700 font-bold text-xs">AI时代</p><p class="text-[10px] text-ink-500">2022+·生成式设计</p></div>
   </div>
+  ${inlineSpot('范式迁移', '<p class="text-ink-600 text-xs leading-relaxed m-0">下图概括数字界面范式的大致递进；布坎南四象限与曼奇尼「人人设计」共同推动「设计对象」从物转向关系与系统。</p>', '<rect x="8" y="12" width="16" height="14" stroke="currentColor" stroke-width="1.2"/><rect x="28" y="18" width="12" height="10" stroke="currentColor" stroke-width="1.2"/><path d="M24 26c6 4 12 2 16-4" stroke="currentColor" stroke-width="1.2" fill="none"/>')}
+  <div id="chart-l7-evolution" style="width:100%;height:300px;" class="my-6 rounded-xl bg-white/95 border border-ink-200 shadow-sm p-2"></div>
 
   ${sectionTitle('中国设计的全球话语位置重构')}
   ${para('深圳从"山寨之都"到"全球硬件创新中心"的转型，是21世纪全球设计知识地理重构最显著的标志性事件之一。深圳的开放式硬件创新生态，挑战了硅谷模式作为唯一创新范式的话语垄断。')}
@@ -757,6 +887,7 @@ function renderL7(){
 // ==================== LECTURE 8 ====================
 function renderL8(){
   return `
+  ${infographicFigure(8,1)}
   ${sectionTitle('引言：三重危机与设计的历史性考验')}
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
     <div class="concept-box border-green-500/20 text-center py-6">
@@ -786,6 +917,7 @@ function renderL8(){
     <div class="flow-arrow">→</div>
     <div class="concept-box text-center px-5 py-4 border-amber-500/30"><p class="text-amber-700 font-bold text-sm">再生设计</p><p class="text-[10px] text-ink-500">2010s至今 · 修复共生</p></div>
   </div>
+  ${inlineSpot('可持续三代', '<p class="text-ink-600 text-xs leading-relaxed m-0">从减害、全生命周期到再生：设计目标由「少破坏」递进到「修复社会—技术—生态」；与生态文明、双碳议程形成可对接的研究议程。</p>', '<path d="M10 40c6-16 28-16 34 0" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="18" cy="28" r="5" stroke="currentColor"/><circle cx="32" cy="18" r="5" stroke="currentColor"/><circle cx="46" cy="30" r="5" stroke="currentColor"/>')}
   ${theoristCard('凯特·弗莱彻','','可持续时尚理论权威','提出"慢时尚"框架：从"数量消费"转向"使用质量"，从"新鲜感追求"转向"长期使用关系建立"。核心是恢复消费者与衣物之间被快时尚系统摧毁的情感连接。')}
 
   ${sectionTitle('人工智能与设计的认识论关系')}
@@ -800,11 +932,11 @@ function renderL8(){
     ['执行生成','速度有限','秒级海量生成']
   ])}
 
-  ${sectionTitle('交互、服务设计与数字伦理（文档）')}
+  ${sectionTitle('交互、服务设计与数字伦理')}
   ${para('唐纳德·诺曼《设计心理学》（1988）将评价标准从物本身转向交互过程中的认知体验。从HCI到UX的演化，是认知设计逻辑在数字领域的扩展——屏幕为主媒介时，设计师首先是认知、行为与信息架构的规划者。')}
   ${para('服务设计将边界扩至无形服务：服务蓝图、顾客旅程、利益相关者地图等工具将设计定位为体验系统的规划。英国设计委员会"双钻模型"强调"正确定义问题"与"解决问题"同等重要——解决错误的问题比错误地解决问题更危险。')}
-  ${para('可持续设计在21世纪从绿色设计（局部减害）经生态设计（LCA全链条）走向再生设计（积极修复生态系统与社会关系）。欧盟循环经济行动计划与中国"双碳目标"为设计研究提供政策驱动的研究议程（文档）。')}
-  ${para('黑暗模式（Dark Pattern）指利用认知偏差将界面设计为操控工具；说服性设计在无限滚动、点赞与推送中的伦理边界，揭示同一认知原则既可服务体验也可剥夺注意力自主权。"超级App"将多种功能整合于单一界面，在西方语境中罕见，反映中国数字用户文化与基础设施特质，亦包含便利与数据垄断、注意力捕获之间的张力（文档）。')}
+  ${para('可持续设计在21世纪从绿色设计（局部减害）经生态设计（LCA全链条）走向再生设计（积极修复生态系统与社会关系）。欧盟循环经济行动计划与中国"双碳目标"为设计研究提供政策驱动的研究议程。')}
+  ${para('黑暗模式（Dark Pattern）指利用认知偏差将界面设计为操控工具；说服性设计在无限滚动、点赞与推送中的伦理边界，揭示同一认知原则既可服务体验也可剥夺注意力自主权。"超级App"将多种功能整合于单一界面，在西方语境中罕见，反映中国数字用户文化与基础设施特质，亦包含便利与数据垄断、注意力捕获之间的张力。')}
 
   ${sectionTitle('中国设计研究的学科前沿')}
   ${theoristCard('娄永琪','','设计驱动社会创新的中国路径','同济大学设计创意学院院长。发展出"设计驱动社会创新"的中国实践模式，以上海四平路社区更新为代表。同时保持与国际前沿的深度接轨和对中国社会问题的在地理解。')}
@@ -838,8 +970,11 @@ function renderL8(){
 function initCharts(lecIdx){
   if(lecIdx===0) initL1Charts();
   if(lecIdx===1) initL2Charts();
+  if(lecIdx===2) initL3Charts();
   if(lecIdx===3) initL4Charts();
   if(lecIdx===4) initL5Charts();
+  if(lecIdx===5) initL6Charts();
+  if(lecIdx===6) initL7Charts();
   if(lecIdx===7) initL8Charts();
 }
 
@@ -908,6 +1043,59 @@ function initL2Charts(){
     });
     window.addEventListener('resize',()=>c.resize());
   }
+}
+
+function initL3Charts(){
+  const el=document.getElementById('chart-l3-timeline');
+  if(!el) return;
+  const c=echarts.init(el,null,{renderer:'svg'});
+  c.setOption({
+    backgroundColor:'transparent',
+    title:{text:'现代设计诞生关键节点（1851—1914）',textStyle:{color:'#a16207',fontSize:14,fontFamily:'Noto Sans SC'}},
+    tooltip:{trigger:'axis',formatter:function(p){const i=p[0].dataIndex;const h=['第一届世博会暴露工业制品质量问题','拉斯金—莫里斯传统的道德美学高峰','新艺术席卷欧陆、有机与曲线语言','德意志制造联盟成立、标准化争论','科隆论战：标准化 vs 艺术家个性'];return p[0].name+'<br/>'+h[i];}},
+    grid:{left:'3%',right:'4%',bottom:'12%',top:'14%',containLabel:true},
+    xAxis:{type:'category',data:['1851\n水晶宫','1880s\n工艺美术','1890s\n新艺术','1907\n制造联盟','1914\n科隆论战'],axisLabel:{color:'#64748b',fontSize:10,lineHeight:14},axisLine:{lineStyle:{color:'#cbd5e1'}}},
+    yAxis:{type:'value',name:'改革张力（示意）',max:10,axisLabel:{color:'#64748b'},splitLine:{lineStyle:{color:'rgba(100,120,170,.1)'}},nameTextStyle:{color:'#94a3b8',fontSize:11}},
+    series:[
+      {name:'改革议题强度',type:'line',smooth:true,data:[3,5,6.5,7.5,8.5],lineStyle:{color:'#dc2626',width:2.5},symbolSize:10,itemStyle:{color:'#dc2626'},areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'rgba(220,38,38,.18)'},{offset:1,color:'rgba(220,38,38,.03)'}]}}}
+    ]
+  });
+  window.addEventListener('resize',()=>c.resize());
+}
+
+function initL6Charts(){
+  const el=document.getElementById('chart-l6-radar');
+  if(!el) return;
+  const c=echarts.init(el,null,{renderer:'svg'});
+  c.setOption({
+    backgroundColor:'transparent',
+    title:{text:'现代主义 vs 后现代（话语特征示意）',textStyle:{color:'#a16207',fontSize:14,fontFamily:'Noto Sans SC'}},
+    tooltip:{},
+    radar:{indicator:[
+      {name:'形式纯粹/极简',max:10},{name:'历史与装饰引用',max:10},{name:'反讽与游戏性',max:10},{name:'标准化与类型',max:10},{name:'精英性',max:10},{name:'被市场收编风险',max:10}
+    ],axisName:{color:'#64748b',fontSize:10},splitLine:{lineStyle:{color:'rgba(100,120,170,.15)'}},splitArea:{areaStyle:{color:['rgba(60,75,115,.06)','rgba(60,75,115,.11)']}}},
+    series:[{type:'radar',data:[
+      {value:[9,2,1,9,7,4],name:'现代主义话语',lineStyle:{color:'#2563eb',width:2},itemStyle:{color:'#2563eb'},areaStyle:{color:'rgba(37,99,235,.12)'}},
+      {value:[4,9,8,4,5,9],name:'后现代话语',lineStyle:{color:'#db2777',width:2},itemStyle:{color:'#db2777'},areaStyle:{color:'rgba(219,39,119,.12)'}}
+    ]}],
+    legend:{data:['现代主义话语','后现代话语'],bottom:0,textStyle:{color:'#64748b',fontSize:10}}
+  });
+  window.addEventListener('resize',()=>c.resize());
+}
+
+function initL7Charts(){
+  const el=document.getElementById('chart-l7-evolution');
+  if(!el) return;
+  const c=echarts.init(el,null,{renderer:'svg'});
+  c.setOption({
+    backgroundColor:'transparent',
+    title:{text:'数字设计范式演进（示意强度）',textStyle:{color:'#a16207',fontSize:14,fontFamily:'Noto Sans SC'}},
+    tooltip:{trigger:'axis'},
+    xAxis:{type:'category',data:['GUI','Web 信息架构','移动触控','社交化界面','AI 辅助/生成'],axisLabel:{color:'#64748b',fontSize:10,rotate:18},axisLine:{lineStyle:{color:'#cbd5e1'}}},
+    yAxis:{type:'value',name:'范式影响',max:10,axisLabel:{color:'#64748b'},splitLine:{lineStyle:{color:'rgba(100,120,170,.1)'}},nameTextStyle:{color:'#94a3b8',fontSize:11}},
+    series:[{type:'bar',data:[4,6,8,7,9],itemStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'#0891b2'},{offset:1,color:'#6366f1'}]}},barWidth:'52%',label:{show:true,position:'top',fontSize:9,color:'#64748b'}}]
+  });
+  window.addEventListener('resize',()=>c.resize());
 }
 
 function initL4Charts(){

@@ -142,3 +142,108 @@ body { font-family:'Noto Sans SC',sans-serif; background:#f5f0e8; color:#1a2340;
   background: rgba(255,255,255,.75) !important;
   border-color: rgba(60,75,115,.12) !important;
 }
+
+/* 详情页头部主插图 */
+.detail-figure-frame .detail-figure-pattern {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  opacity: 0.88;
+}
+.detail-figure-frame .detail-figure-pattern svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.detail-figure-frame .detail-figure-img {
+  position: relative;
+  z-index: 1;
+}
+
+/* 章节视觉提要条：图标 + 短标签 */
+.chapter-visual-bar {
+  background: linear-gradient(135deg, rgba(255,255,255,.97), rgba(250,247,242,.92));
+  border: 1px solid rgba(60,75,115,.14);
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 8px 28px rgba(26,35,64,.06);
+}
+.chapter-visual-bar .viz-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 12px;
+  transition: background .2s ease;
+}
+.chapter-visual-bar .viz-item:hover {
+  background: rgba(212,168,83,.08);
+}
+.chapter-visual-bar .viz-svg-wrap {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(60,75,115,.06);
+  color: #3c4b73;
+}
+.chapter-visual-bar .viz-svg-wrap svg {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+}
+
+/* 内联小插图：与段落穿插 */
+.inline-spot-illus {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 1rem;
+  margin: 1.75rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  border: 1px dashed rgba(212,168,83,.45);
+  background: rgba(255,255,255,.6);
+}
+.inline-spot-illus .spot-svg {
+  flex: 0 0 auto;
+  width: 5rem;
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(212,168,83,.12);
+  color: #2a3557;
+}
+.inline-spot-illus .spot-svg svg {
+  width: 4rem;
+  height: 4rem;
+}
+.inline-spot-illus .spot-text {
+  flex: 1;
+  min-width: 200px;
+}
+.inline-spot-illus .spot-text p {
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: #3c4b73;
+  margin: 0;
+}
+
+/* 详情页标题区：矢量主图标 */
+.lecture-hero-icon {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  color: var(--lec-accent, #6366f1);
+}
+.lecture-hero-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

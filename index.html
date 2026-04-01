@@ -1,126 +1,209 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>设计史论 — 课程思政示范课程</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        ink: { 50:'#f0f1f4', 100:'#d8dbe3', 200:'#b1b7c7', 300:'#8a93ab', 400:'#636f8f', 500:'#3c4b73', 600:'#2a3557', 700:'#1a2340', 800:'#0f1729', 900:'#0a1122' },
-        amber: { 400:'#e8c87a', 500:'#d4a853', 600:'#b8893a' },
-        cream: '#f5f0e8',
-        parchment: '#faf7f2',
-      },
-      fontFamily: {
-        display: ['Playfair Display', 'serif'],
-        body: ['Noto Sans SC', 'sans-serif'],
-        mono: ['DM Mono', 'monospace'],
-      }
-    }
-  }
-}
-</script>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<!-- ==================== HOMEPAGE ==================== -->
-<div id="page-home" class="page active">
-
-  <!-- HERO -->
-  <section class="hero-pattern min-h-[520px] flex items-center relative overflow-hidden">
-    <div class="absolute inset-0 opacity-[.03]" style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><rect fill=%22none%22 stroke=%22%23d4a853%22 stroke-width=%22.5%22 x=%2210%22 y=%2210%22 width=%2240%22 height=%2240%22/></svg>');"></div>
-    <div class="max-w-6xl mx-auto px-6 py-20 relative z-10 w-full">
-      <div class="flex flex-col lg:flex-row gap-12 items-start">
-        <div class="flex-1">
-          <div class="flex items-center gap-3 mb-6 fade-up">
-            <span class="w-8 h-[2px] bg-amber-600"></span>
-            <span class="font-mono text-xs tracking-[.2em] text-amber-700 uppercase">Graduate Course · 2026</span>
-          </div>
-          <h1 class="font-display text-5xl lg:text-6xl font-bold text-ink-800 leading-[1.1] mb-4 fade-up fade-up-d1">
-            设计史论
-          </h1>
-          <p class="text-xl text-ink-600 mb-8 max-w-lg fade-up fade-up-d2">课程思政示范课程</p>
-          <p class="text-ink-600 text-sm leading-relaxed max-w-md mb-10 fade-up fade-up-d3">
-            以"设计史的书写方式本身即是一种知识权力实践"为核心命题，系统建构设计学研究生的批评性史学素养与方法论自觉。
-          </p>
-          <div class="flex flex-wrap gap-3 fade-up fade-up-d4">
-            <span class="px-3 py-1.5 bg-white/90 rounded-full text-xs text-ink-700 border border-ink-200 shadow-sm">32学时</span>
-            <span class="px-3 py-1.5 bg-white/90 rounded-full text-xs text-ink-700 border border-ink-200 shadow-sm">8次课</span>
-            <span class="px-3 py-1.5 bg-white/90 rounded-full text-xs text-ink-700 border border-ink-200 shadow-sm">每次4课时</span>
-            <span class="px-3 py-1.5 bg-white/90 rounded-full text-xs text-ink-700 border border-ink-200 shadow-sm">硕士研究生</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>设计史论 — 课程思政示范课程</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: {
+                50: "#f0f1f4",
+                100: "#d8dbe3",
+                200: "#b1b7c7",
+                300: "#8a93ab",
+                400: "#636f8f",
+                500: "#3c4b73",
+                600: "#2a3557",
+                700: "#1a2340",
+                800: "#0f1729",
+                900: "#0a1122",
+              },
+              amber: { 400: "#e8c87a", 500: "#d4a853", 600: "#b8893a" },
+              cream: "#f5f0e8",
+              parchment: "#faf7f2",
+            },
+            fontFamily: {
+              display: ["Playfair Display", "serif"],
+              body: ["Noto Sans SC", "sans-serif"],
+              mono: ["DM Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ==================== HOMEPAGE ==================== -->
+    <div id="page-home" class="page active">
+      <!-- HERO -->
+      <section
+        class="hero-pattern min-h-[520px] flex items-center relative overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 opacity-[.03]"
+          style="
+            background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><rect fill=%22none%22 stroke=%22%23d4a853%22 stroke-width=%22.5%22 x=%2210%22 y=%2210%22 width=%2240%22 height=%2240%22/></svg>&quot;);
+          "
+        ></div>
+        <div class="max-w-6xl mx-auto px-6 py-20 relative z-10 w-full">
+          <div class="flex flex-col lg:flex-row gap-12 items-start">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-6 fade-up">
+                <span class="w-8 h-[2px] bg-amber-600"></span>
+                <span
+                  class="font-mono text-xs tracking-[.2em] text-amber-700 uppercase"
+                  >Graduate Course · 2026</span
+                >
+              </div>
+              <h1
+                class="font-display text-5xl lg:text-6xl font-bold text-ink-800 leading-[1.1] mb-4 fade-up fade-up-d1"
+              >
+                设计史论
+              </h1>
+              <p class="text-xl text-ink-600 mb-8 max-w-lg fade-up fade-up-d2">
+                课程思政示范课程
+              </p>
+              <p
+                class="text-ink-600 text-sm leading-relaxed max-w-md mb-10 fade-up fade-up-d3"
+              >
+                以"设计史的书写方式本身即是一种知识权力实践"为核心命题，系统建构设计学研究生的批评性史学素养与方法论自觉。
+              </p>
+              <div class="flex flex-wrap gap-3 fade-up fade-up-d4">
+                <span
+                  class="px-3 py-1.5 bg-white/90 rounded-full text-xs text-ink-700 border border-ink-200 shadow-sm"
+                  >32学时</span
+                >
+                <span
+                  class="px-3 py-1.5 bg-white/90 rounded-full text-xs text-ink-700 border border-ink-200 shadow-sm"
+                  >8次课</span
+                >
+                <span
+                  class="px-3 py-1.5 bg-white/90 rounded-full text-xs text-ink-700 border border-ink-200 shadow-sm"
+                  >每次4课时</span
+                >
+                <span
+                  class="px-3 py-1.5 bg-white/90 rounded-full text-xs text-ink-700 border border-ink-200 shadow-sm"
+                  >硕士研究生</span
+                >
+              </div>
+            </div>
+            <div class="lg:w-[340px] w-full fade-up fade-up-d3">
+              <div
+                class="bg-white/95 backdrop-blur border border-ink-200 rounded-2xl p-6 space-y-4 shadow-md shadow-ink-900/5"
+              >
+                <div class="flex items-center gap-2 mb-2">
+                  <svg
+                    class="w-4 h-4 text-amber-600"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="text-xs font-mono text-amber-700 tracking-wide"
+                    >项目信息</span
+                  >
+                </div>
+                <div class="space-y-3 text-sm">
+                  <div>
+                    <span class="text-ink-500">项目编号</span><br /><span
+                      class="text-ink-800 font-mono text-xs"
+                      >2023szsfkc079</span
+                    >
+                  </div>
+                  <div>
+                    <span class="text-ink-500">项目来源</span><br /><span
+                      class="text-ink-700 text-xs"
+                      >安徽省教育厅 · 新时代育人质量工程项目（研究生教育）</span
+                    >
+                  </div>
+                  <div>
+                    <span class="text-ink-500">项目主持</span><br /><span
+                      class="text-ink-800"
+                      >胡家增、冯白帆</span
+                    >
+                  </div>
+                  <div>
+                    <span class="text-ink-500">项目人员</span><br /><span
+                      class="text-ink-700 text-xs"
+                      >彭海燕、胡劲峰、徐轩露、田培春、张焱</span
+                    >
+                  </div>
+                  <div>
+                    <span class="text-ink-500">撰写日期</span><br /><span
+                      class="text-ink-700"
+                      >2026年4月</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lg:w-[340px] w-full fade-up fade-up-d3">
-          <div class="bg-white/95 backdrop-blur border border-ink-200 rounded-2xl p-6 space-y-4 shadow-md shadow-ink-900/5">
-            <div class="flex items-center gap-2 mb-2">
-              <svg class="w-4 h-4 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5z" clip-rule="evenodd"/></svg>
-              <span class="text-xs font-mono text-amber-700 tracking-wide">项目信息</span>
-            </div>
-            <div class="space-y-3 text-sm">
-              <div><span class="text-ink-500">项目编号</span><br><span class="text-ink-800 font-mono text-xs">2023szsfkc079</span></div>
-              <div><span class="text-ink-500">项目来源</span><br><span class="text-ink-700 text-xs">安徽省教育厅 · 新时代育人质量工程项目（研究生教育）</span></div>
-              <div><span class="text-ink-500">项目主持</span><br><span class="text-ink-800">胡家增、冯白帆</span></div>
-              <div><span class="text-ink-500">项目人员</span><br><span class="text-ink-700 text-xs">彭海燕、胡劲峰、徐轩露、田培春、张焱</span></div>
-              <div><span class="text-ink-500">撰写日期</span><br><span class="text-ink-700">2026年4月</span></div>
-            </div>
+      </section>
+
+      <!-- COURSE PROGRESS -->
+      <section class="max-w-6xl mx-auto px-6 py-4">
+        <div class="flex gap-1.5">
+          <div class="progress-seg flex-1 bg-amber-500/70"></div>
+          <div class="progress-seg flex-1 bg-amber-500/50"></div>
+          <div class="progress-seg flex-1 bg-amber-500/40"></div>
+          <div class="progress-seg flex-1 bg-amber-500/30"></div>
+          <div class="progress-seg flex-1 bg-ink-300/60"></div>
+          <div class="progress-seg flex-1 bg-ink-300/50"></div>
+          <div class="progress-seg flex-1 bg-ink-300/40"></div>
+          <div class="progress-seg flex-1 bg-ink-200/70"></div>
+        </div>
+        <p class="text-ink-500 text-xs mt-2 font-mono tracking-wide">
+          8 LECTURES · 32 HOURS · 完整课程体系
+        </p>
+      </section>
+
+      <!-- LECTURE CARDS -->
+      <section class="max-w-6xl mx-auto px-6 py-12" id="lectures">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="card-grid">
+          <!-- Cards injected by JS -->
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="max-w-6xl mx-auto px-6 py-12 border-t border-ink-200">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start gap-6 text-xs text-ink-500"
+        >
+          <div>
+            <p class="font-display text-lg text-ink-800 mb-1">设计史论</p>
+            <p>安徽省教育厅 · 新时代育人质量工程项目</p>
+          </div>
+          <div class="text-right">
+            <p>项目编号 2023szsfkc079</p>
+            <p class="mt-1">© 2026 课程思政示范课程</p>
           </div>
         </div>
-      </div>
+      </footer>
     </div>
-  </section>
 
-  <!-- COURSE PROGRESS -->
-  <section class="max-w-6xl mx-auto px-6 py-4">
-    <div class="flex gap-1.5">
-      <div class="progress-seg flex-1 bg-amber-500/70"></div>
-      <div class="progress-seg flex-1 bg-amber-500/50"></div>
-      <div class="progress-seg flex-1 bg-amber-500/40"></div>
-      <div class="progress-seg flex-1 bg-amber-500/30"></div>
-      <div class="progress-seg flex-1 bg-ink-300/60"></div>
-      <div class="progress-seg flex-1 bg-ink-300/50"></div>
-      <div class="progress-seg flex-1 bg-ink-300/40"></div>
-      <div class="progress-seg flex-1 bg-ink-200/70"></div>
+    <!-- ==================== DETAIL PAGE TEMPLATE ==================== -->
+    <div id="page-detail" class="page min-h-screen bg-[#f5f0e8]">
+      <div id="detail-content"></div>
     </div>
-    <p class="text-ink-500 text-xs mt-2 font-mono tracking-wide">8 LECTURES · 32 HOURS · 完整课程体系</p>
-  </section>
 
-  <!-- LECTURE CARDS -->
-  <section class="max-w-6xl mx-auto px-6 py-12" id="lectures">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="card-grid">
-      <!-- Cards injected by JS -->
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="max-w-6xl mx-auto px-6 py-12 border-t border-ink-200">
-    <div class="flex flex-col md:flex-row justify-between items-start gap-6 text-xs text-ink-500">
-      <div>
-        <p class="font-display text-lg text-ink-800 mb-1">设计史论</p>
-        <p>安徽省教育厅 · 新时代育人质量工程项目</p>
-      </div>
-      <div class="text-right">
-        <p>项目编号 2023szsfkc079</p>
-        <p class="mt-1">© 2026 课程思政示范课程</p>
-      </div>
-    </div>
-  </footer>
-</div>
-
-<!-- ==================== DETAIL PAGE TEMPLATE ==================== -->
-<div id="page-detail" class="page min-h-screen bg-[#f5f0e8]">
-  <div id="detail-content"></div>
-</div>
-
-<!-- ==================== JAVASCRIPT ==================== -->
-<script src="main.js"></script>
-
-</body>
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script src="main.js"></script>
+  </body>
 </html>
