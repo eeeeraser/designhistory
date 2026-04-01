@@ -1,0 +1,144 @@
+/* BASE STYLES — 浅色模式 */
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Sans SC',sans-serif; background:#f5f0e8; color:#1a2340; overflow-x:hidden; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:#e8e4dc; }
+::-webkit-scrollbar-thumb { background:#b1b7c7; border-radius:3px; }
+::-webkit-scrollbar-thumb:hover { background:#8a93ab; }
+
+/* PAGE TRANSITIONS */
+.page { display:none; }
+.page.active { display:block; animation: pageFadeIn .4s ease forwards; }
+@keyframes pageFadeIn { from { opacity:0; } to { opacity:1; } }
+
+/* HERO PATTERN */
+.hero-pattern {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(212,168,83,.18) 0%, transparent 55%),
+    radial-gradient(circle at 80% 20%, rgba(60,75,115,.08) 0%, transparent 50%),
+    linear-gradient(165deg, #faf7f2 0%, #f0ebe3 45%, #e8e2d6 100%);
+}
+
+/* CARD HOVER */
+.lecture-card {
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.lecture-card::before {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(212,168,83,.06) 0%, transparent 60%);
+  opacity:0; transition:opacity .35s ease;
+}
+.lecture-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(26,35,64,.12); }
+.lecture-card:hover::before { opacity:1; }
+
+/* CARD PATTERNS - unique per lecture */
+.card-pattern { position:absolute; right:-10px; bottom:-10px; width:120px; height:120px; opacity:.08; pointer-events:none; }
+
+/* SECTION NAV */
+.section-nav a { display:block; padding:6px 12px; font-size:13px; color:#8a93ab; border-left:2px solid transparent; transition:all .2s; text-decoration:none; }
+.section-nav a:hover, .section-nav a.active { color:#d4a853; border-left-color:#d4a853; }
+
+/* ACCORDION */
+.accordion-header { cursor:pointer; user-select:none; }
+.accordion-header .chevron { transition:transform .3s ease; }
+.accordion-header.open .chevron { transform:rotate(180deg); }
+.accordion-body { max-height:0; overflow:hidden; transition:max-height .4s ease; }
+.accordion-body.open { max-height:5000px; }
+
+/* THEORIST CARD */
+.theorist-card {
+  background: linear-gradient(145deg, #ffffff, #faf7f2);
+  border:1px solid rgba(60,75,115,.2);
+  border-radius:12px;
+  padding:20px;
+  transition:border-color .3s;
+}
+.theorist-card:hover { border-color:rgba(212,168,83,.55); }
+
+/* QUOTE */
+.quote-callout {
+  border-left:3px solid #c9a227;
+  background:rgba(212,168,83,.12);
+  padding:16px 20px;
+  border-radius:0 8px 8px 0;
+  font-style:italic;
+  position:relative;
+}
+.quote-callout::before {
+  content:'\201C'; font-family:'Playfair Display'; font-size:48px; color:rgba(180,140,50,.25);
+  position:absolute; top:-8px; left:8px;
+}
+
+/* KEY CONCEPT BOX */
+.concept-box {
+  background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(240,241,244,.9));
+  border:1px solid rgba(60,75,115,.18);
+  border-radius:10px;
+  padding:16px 20px;
+}
+
+/* FLOW CONNECTOR */
+.flow-arrow {
+  display:flex; align-items:center; justify-content:center;
+  color:#b45309; font-size:20px;
+}
+
+/* FADE IN ANIMATION */
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.fade-up { animation: fadeUp .6s ease forwards; }
+.fade-up-d1 { animation-delay:.1s; opacity:0; }
+.fade-up-d2 { animation-delay:.2s; opacity:0; }
+.fade-up-d3 { animation-delay:.3s; opacity:0; }
+.fade-up-d4 { animation-delay:.4s; opacity:0; }
+
+/* TOOLTIP */
+[data-tooltip] { position:relative; }
+[data-tooltip]:hover::after {
+  content:attr(data-tooltip);
+  position:absolute; bottom:110%; left:50%; transform:translateX(-50%);
+  background:#fff; color:#1a2340; padding:4px 10px; border-radius:4px;
+  font-size:12px; white-space:nowrap; z-index:99; border:1px solid rgba(60,75,115,.2); box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+/* PROGRESS BAR */
+.progress-seg { height:4px; border-radius:2px; transition:background .3s; }
+
+/* RESPONSIVE */
+@media(max-width:768px) {
+  .section-nav-wrapper { display:none !important; }
+  .detail-content { margin-left:0 !important; }
+}
+
+/* BACK BTN */
+.back-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  color:#64748b; font-size:14px; text-decoration:none;
+  transition:color .2s;
+}
+.back-btn:hover { color:#a16207; }
+
+/* TABLE */
+.data-table { width:100%; border-collapse:collapse; font-size:14px; }
+.data-table th { background:rgba(212,168,83,.18); padding:10px 14px; text-align:left; font-weight:500; color:#5c4a1a; border-bottom:1px solid rgba(180,150,80,.35); }
+.data-table td { padding:10px 14px; border-bottom:1px solid rgba(60,75,115,.12); color:#2a3557; }
+.data-table tr:hover td { background:rgba(60,75,115,.06); }
+
+/* LECTURE NUM BADGE */
+.lec-num {
+  font-family:'Playfair Display'; font-size:48px; font-weight:700;
+  color:rgba(180,150,90,.22); position:absolute; top:12px; right:16px;
+  line-height:1;
+}
+
+/* 详情页图表容器（浅色） */
+.chart-surface {
+  background: rgba(255,255,255,.75) !important;
+  border-color: rgba(60,75,115,.12) !important;
+}
