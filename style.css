@@ -247,3 +247,196 @@ body { font-family:'Noto Sans SC',sans-serif; background:#f5f0e8; color:#1a2340;
   height: 100%;
   display: block;
 }
+
+/* ========== 研讨习题 · 统一时间轴 ========== */
+.seminar-timeline {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.seminar-timeline::before {
+  content: "";
+  position: absolute;
+  left: 1.35rem;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(
+    180deg,
+    rgba(8,145,178,.55) 0%,
+    rgba(212,168,83,.6) 40%,
+    rgba(139,92,246,.55) 100%
+  );
+}
+
+/* ---- 章节标记（大节点） ---- */
+.stl-section {
+  position: relative;
+  padding: 0 0 1.25rem 3.75rem;
+}
+.stl-section-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(26,35,64,.14);
+  z-index: 2;
+}
+.stl-section-dot--reading { background: linear-gradient(135deg,#0891b2,#06b6d4); }
+.stl-section-dot--question { background: linear-gradient(135deg,#b45309,#d4a853); }
+.stl-section-dot--seminar  { background: linear-gradient(135deg,#7c3aed,#8b5cf6); }
+
+.stl-section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a2340;
+  line-height: 2.75rem;
+}
+.stl-section-title small {
+  font-weight: 400;
+  font-size: .75rem;
+  color: #8a93ab;
+  margin-left: .5rem;
+}
+
+/* ---- 普通条目（小节点） ---- */
+.stl-item {
+  position: relative;
+  padding: 0 0 1.25rem 3.75rem;
+}
+.stl-item:last-child { padding-bottom: 0; }
+
+.stl-dot {
+  position: absolute;
+  left: .55rem;
+  top: .15rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  z-index: 2;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.stl-item:hover .stl-dot {
+  transform: scale(1.18);
+  box-shadow: 0 0 0 4px rgba(212,168,83,.18);
+}
+
+.stl-dot--reading {
+  color: #065f73;
+  background: #e0f7fa;
+  border: 2px solid rgba(8,145,178,.45);
+}
+.stl-dot--question {
+  color: #7a4b09;
+  background: #fef3c7;
+  border: 2px solid rgba(212,168,83,.5);
+}
+.stl-dot--seminar {
+  color: #5b21b6;
+  background: #ede9fe;
+  border: 2px solid rgba(139,92,246,.45);
+}
+
+/* ---- 卡片 ---- */
+.stl-card {
+  border-radius: 12px;
+  padding: .85rem 1.1rem;
+  transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease, border-color .3s;
+}
+.stl-item:hover .stl-card {
+  transform: translateX(4px);
+  box-shadow: 0 8px 28px rgba(26,35,64,.1);
+}
+
+.stl-card--reading {
+  background: linear-gradient(135deg,rgba(224,247,250,.65),rgba(255,255,255,.88));
+  border: 1px solid rgba(8,145,178,.2);
+}
+.stl-item:hover .stl-card--reading { border-color: rgba(8,145,178,.45); }
+
+.stl-card--question {
+  background: linear-gradient(135deg,rgba(254,243,199,.5),rgba(255,255,255,.88));
+  border: 1px solid rgba(212,168,83,.22);
+}
+.stl-item:hover .stl-card--question { border-color: rgba(212,168,83,.5); }
+
+.stl-card--seminar {
+  background: linear-gradient(135deg,rgba(237,233,254,.55),rgba(255,255,255,.88));
+  border: 1px solid rgba(139,92,246,.2);
+}
+.stl-item:hover .stl-card--seminar { border-color: rgba(139,92,246,.45); }
+
+/* ---- 核心议题高亮 ---- */
+.stl-core {
+  position: relative;
+  padding: 0 0 1.25rem 3.75rem;
+}
+.stl-core-dot {
+  position: absolute;
+  left: .2rem;
+  top: .1rem;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .95rem;
+  color: #fff;
+  background: linear-gradient(135deg,#7c3aed,#a855f7);
+  box-shadow: 0 4px 14px rgba(124,58,237,.25);
+  z-index: 2;
+}
+.stl-core-card {
+  border-left: 4px solid #8b5cf6;
+  background: linear-gradient(135deg,rgba(237,233,254,.75),rgba(255,255,255,.92));
+  border-radius: 0 12px 12px 0;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 6px 22px rgba(124,58,237,.1);
+}
+
+/* ---- 层次标签 ---- */
+.stl-layer-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.stl-layer-tag--1 { background: rgba(139,92,246,.12); color: #6d28d9; }
+.stl-layer-tag--2 { background: rgba(236,72,153,.12); color: #be185d; }
+.stl-layer-tag--3 { background: rgba(8,145,178,.12); color: #0e7490; }
+
+/* ---- 时间轴末端圆点 ---- */
+.stl-end {
+  position: relative;
+  padding-left: 3.75rem;
+  padding-top: .25rem;
+}
+.stl-end-dot {
+  position: absolute;
+  left: .85rem;
+  top: .35rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#8b5cf6,#d4a853);
+  box-shadow: 0 2px 8px rgba(139,92,246,.2);
+  z-index: 2;
+}

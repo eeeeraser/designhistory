@@ -209,14 +209,71 @@ function renderToolBoxDoc(i){
 function renderReadingSeminar(i){
   const d = DOC_APPENDIX[i];
   if(!d) return '';
-  const layers = d.seminar.layers.map((L,idx)=>`<div class="mb-4 pl-4 border-l-2 border-ink-200"><span class="text-xs font-bold text-ink-500">第${['一','二','三'][idx]}层（${L.k}）</span><p class="text-sm text-ink-700 mt-1 leading-relaxed">${L.t}</p></div>`).join('');
-  return `${sectionTitle('指定精读文献')}
-  <ol class="list-decimal pl-5 space-y-3 text-sm text-ink-700 leading-relaxed mb-8">${d.readings.map(r=>`<li>${r}</li>`).join('')}</ol>
-  ${subTitle('精读引导问题')}
-  <div class="space-y-3 mb-8">${d.questions.map((q,j)=>`<div class="flex gap-3"><span class="text-amber-700 font-mono text-xs flex-shrink-0">${j+1}.</span><p class="text-sm text-ink-700 leading-relaxed">${q}</p></div>`).join('')}</div>
-  ${subTitle('研讨议题（约50分钟）')}
-  <p class="text-sm font-medium text-ink-800 mb-4">核心议题：${d.seminar.core}</p>
-  ${layers}`;
+
+  const readingItems = d.readings.map((r, j) => `
+    <li class="stl-item">
+      <span class="stl-dot stl-dot--reading">${j + 1}</span>
+      <div class="stl-card stl-card--reading">
+        <p class="text-sm text-ink-700 leading-relaxed">${r}</p>
+      </div>
+    </li>`).join('');
+
+  const questionItems = d.questions.map((q, j) => `
+    <li class="stl-item">
+      <span class="stl-dot stl-dot--question">${j + 1}</span>
+      <div class="stl-card stl-card--question">
+        <p class="text-sm text-ink-700 leading-relaxed">${q}</p>
+      </div>
+    </li>`).join('');
+
+  const layerColors = ['stl-layer-tag--1','stl-layer-tag--2','stl-layer-tag--3'];
+  const layerNames = ['一','二','三'];
+  const layerItems = d.seminar.layers.map((L, idx) => `
+    <li class="stl-item">
+      <span class="stl-dot stl-dot--seminar">${idx + 1}</span>
+      <div class="stl-card stl-card--seminar">
+        <span class="stl-layer-tag ${layerColors[idx]}">第${layerNames[idx]}层 · ${L.k}</span>
+        <p class="text-sm text-ink-700 leading-relaxed mt-1">${L.t}</p>
+      </div>
+    </li>`).join('');
+
+  return `
+  ${sectionTitle('研讨习题')}
+  <ul class="seminar-timeline">
+    <!-- 精读文献 -->
+    <li class="stl-section">
+      <span class="stl-section-dot stl-section-dot--reading">📖</span>
+      <span class="stl-section-title">指定精读文献<small>${d.readings.length} 篇</small></span>
+    </li>
+    ${readingItems}
+
+    <!-- 精读引导问题 -->
+    <li class="stl-section">
+      <span class="stl-section-dot stl-section-dot--question">💡</span>
+      <span class="stl-section-title">精读引导问题<small>${d.questions.length} 题</small></span>
+    </li>
+    ${questionItems}
+
+    <!-- 研讨议题 -->
+    <li class="stl-section">
+      <span class="stl-section-dot stl-section-dot--seminar">🎓</span>
+      <span class="stl-section-title">研讨议题<small>约 50 分钟</small></span>
+    </li>
+    <li class="stl-core">
+      <span class="stl-core-dot">★</span>
+      <div class="stl-core-card">
+        <p class="text-xs font-mono text-purple-600 tracking-wider uppercase mb-1">Core Topic</p>
+        <p class="text-base font-bold text-ink-800 leading-relaxed">${d.seminar.core}</p>
+      </div>
+    </li>
+    ${layerItems}
+
+    <!-- 终点 -->
+    <li class="stl-end">
+      <span class="stl-end-dot"></span>
+      <p class="text-xs text-ink-400 font-mono tracking-wide">— END OF SEMINAR —</p>
+    </li>
+  </ul>`;
 }
 
 function renderPaperNoteAfterCivic(i){
@@ -1100,28 +1157,56 @@ function initL7Charts(){
 
 function initL4Charts(){
   const el=document.getElementById('chart-l4-timeline');
-  if(el){
-    const c=echarts.init(el,null,{renderer:'svg'});
-    c.setOption({
-      backgroundColor:'transparent',
-      title:{text:'包豪斯三阶段历史进程（1919—1933）',textStyle:{color:'#a16207',fontSize:14,fontFamily:'Noto Sans SC'}},
-      tooltip:{trigger:'item'},
-      xAxis:{type:'value',min:1918,max:1935,axisLabel:{color:'#64748b',formatter:'{value}'},splitLine:{show:false},axisLine:{lineStyle:{color:'#cbd5e1'}}},
-      yAxis:{type:'category',data:['包豪斯'],axisLabel:{show:false},axisLine:{show:false},axisTick:{show:false}},
-      series:[
-        {type:'bar',stack:'t',data:[{value:[1919,1925],itemStyle:{color:'rgba(245,158,11,.4)'}}],encode:{x:[0,1]},barWidth:40,label:{show:true,position:'inside',formatter:'魏玛阶段',color:'#1e293b',fontSize:12}},
-      ],
-      graphic:[
-        {type:'rect',left:'12%',top:'35%',shape:{width:200,height:40,r:4},style:{fill:'rgba(245,158,11,.3)'}},
-        {type:'text',left:'14%',top:'42%',style:{text:'魏玛 1919-1925',fill:'#d4a853',fontSize:13}},
-        {type:'rect',left:'42%',top:'35%',shape:{width:200,height:40,r:4},style:{fill:'rgba(6,182,212,.3)'}},
-        {type:'text',left:'44%',top:'42%',style:{text:'德绍 1925-1932',fill:'#06b6d4',fontSize:13}},
-        {type:'rect',left:'75%',top:'35%',shape:{width:80,height:40,r:4},style:{fill:'rgba(236,72,153,.3)'}},
-        {type:'text',left:'76%',top:'42%',style:{text:'柏林 32-33',fill:'#ec4899',fontSize:13}}
-      ]
-    });
-    window.addEventListener('resize',()=>c.resize());
+  if(!el) return;
+  const c=echarts.init(el,null,{renderer:'svg'});
+  var phases=[
+    {name:'魏玛阶段',start:1919,end:1925,fill:'rgba(245,158,11,.32)',stroke:'#d97706',text:'#92400e',desc:'格罗皮乌斯 · 表现主义 + 手工艺'},
+    {name:'德绍阶段',start:1925,end:1932,fill:'rgba(6,182,212,.28)',stroke:'#0891b2',text:'#155e75',desc:'格罗皮乌斯→迈耶 · 工业理性主义'},
+    {name:'柏林阶段',start:1932,end:1933,fill:'rgba(236,72,153,.28)',stroke:'#db2777',text:'#9d174d',desc:'密斯·凡·德·罗 · 政治压力下解散'}
+  ];
+  var data=phases.map(function(p,i){return [p.start,p.end,i];});
+
+  function renderPhase(params,api){
+    var xStart=api.coord([api.value(0),0]);
+    var xEnd=api.coord([api.value(1),0]);
+    var idx=api.value(2);
+    var ph=phases[idx];
+    var bandH=54;
+    var cy=params.coordSys.y+params.coordSys.height/2;
+    var x=xStart[0]; var w=xEnd[0]-xStart[0]; var y=cy-bandH/2;
+    var children=[
+      {type:'rect',shape:{x:x,y:y,width:w,height:bandH,r:6},style:{fill:ph.fill,stroke:ph.stroke,lineWidth:1.5}},
+      {type:'text',style:{x:x+w/2,y:cy-8,text:ph.name,fill:ph.text,font:'bold 13px "Noto Sans SC"',textAlign:'center'}},
+      {type:'text',style:{x:x+w/2,y:cy+12,text:ph.start+' — '+ph.end,fill:ph.stroke,font:'11px "DM Mono"',textAlign:'center',opacity:.85}}
+    ];
+    if(w<60){
+      children[1].style.font='bold 11px "Noto Sans SC"';
+      children[2].style.font='9px "DM Mono"';
+    }
+    return {type:'group',children:children};
   }
+
+  c.setOption({
+    backgroundColor:'transparent',
+    title:{text:'包豪斯三阶段历史进程（1919—1933）',textStyle:{color:'#a16207',fontSize:14,fontFamily:'Noto Sans SC'}},
+    tooltip:{trigger:'item',formatter:function(p){var ph=phases[p.value[2]];return '<b>'+ph.name+'</b><br/>'+ph.start+' — '+ph.end+'<br/><span style="color:'+ph.stroke+'">'+ph.desc+'</span>';}},
+    grid:{left:'3%',right:'4%',top:'20%',bottom:'14%',containLabel:true},
+    xAxis:{type:'value',min:1918,max:1935,interval:1,
+      axisLabel:{color:'#64748b',fontSize:11,formatter:function(v){return v>=1919&&v<=1933?String(v):''}},
+      splitLine:{show:false},
+      axisLine:{lineStyle:{color:'#cbd5e1'}},
+      axisTick:{alignWithLabel:true,lineStyle:{color:'#cbd5e1'}}
+    },
+    yAxis:{show:false},
+    series:[{
+      type:'custom',
+      renderItem:renderPhase,
+      encode:{x:[0,1]},
+      data:data,
+      z:10
+    }]
+  });
+  window.addEventListener('resize',()=>c.resize());
 }
 
 function initL5Charts(){
